@@ -13,8 +13,8 @@ import  type {GridType,TileType} from "./types"
 
 export const resetGrid=({
     grid,
-    startTile?:START_TILE_CONFIGURATION,
-    endtile?: END_TILE_CONFIGURATION,
+    startTile=START_TILE_CONFIGURATION,
+    endTile=END_TILE_CONFIGURATION,
 }:{
     grid:GridType,
     startTile:TileType,
@@ -23,8 +23,8 @@ export const resetGrid=({
     for(let row=0; row<MAX_ROWS;row++){
         for(let col=0;col<MAX_COLS;col++){
             const tile=grid[row][col];
-            tile.distance=false;
-            tile.isTraversed-false;
+            tile.distance=Infinity;
+            tile.isTraversed=false;
             tile.isPath=false;
             tile.parent=null;
             tile.isWall=false;
