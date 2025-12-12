@@ -4,13 +4,34 @@ import { useTile } from "../context/hooks/useTile";
 import  { MAZES } from "../context/utils/constants";
 import type { MazeType } from "../context/utils/types";
 import { resetGrid } from "../context/utils/resetGrid";
+import {useState} from  "react";
+import { useSpeed } from "../context/hooks/useSpeed";
+import { runMazeAlgorithm } from "../context/utils/runmazealgo";
 
 export function Nav(){
-    const {maze,setMaze,grid}=usePathfinding();
+    const {isDisabled ,setIsDisabled}=useState(false);
+    const {maze,setMaze,grid,setGrid,setIsGraphVisualized}=usePathfinding();
     const {startTile,endTile}=useTile();
-    const handleGenerateMaze=(maze :MazeType)=>{
+    const {speed}=useSpeed();
+    const handleGenerateMaze=(maze :MazeType)=>{ 
+        if(maze==="NONE"){
         setMaze(maze);
         resetGrid({grid,startTile,endTile})
+        }
+        setMaze(maze);
+        setIsDisabled(true);
+        runMazeAlgorithm({
+            maze,
+            grid,
+            startTile,
+            endTile,
+            setIsDisabled,
+            speed,
+        });
+        const newGrid=grid.slice();
+        setGrid(newGrid)
+        setIsGraphVisualized(false)
+        
     };
     
     return (
