@@ -1,4 +1,4 @@
-import type { MazeSelectType, SpeedSelectType } from "./types";
+import type { MazeSelectType, SpeedSelectType ,AlgorithmSlectType} from "./types";
 
 export const MAX_ROWS=39;
 export const MAX_COLS=49;
@@ -41,7 +41,12 @@ export const MAZES:MazeSelectType[]=[
     {name:"Recursive Division", value:"Recursive Division"},
 ];
 
-
+export const PATHFINDING_ALGORITHMS:AlgorithmSlectType[]=[
+    {name:"Dijkstra" ,value:"Dijkstra"},
+    {name:"A-Star" ,value:"A_Star"},
+    {name:"Breath-First-Search",value:'BFS'},
+    {name:"Depth-First-Search",value:"DFS"}
+]
 export const SPEEDS:SpeedSelectType[]=[
     {
         name:"Slow", value:2
@@ -55,3 +60,4 @@ export const SPEEDS:SpeedSelectType[]=[
 ]
 
 export const SLEEP_TIME=0;
+export const EXTENDED_SLEEP_TIME=30;

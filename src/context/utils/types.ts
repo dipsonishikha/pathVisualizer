@@ -1,5 +1,13 @@
-export type AlgorithmType="Dijkstra" |"A_Star"|"BFS"|"DFS";
+export type AlgorithmType =
+  | "Dijkstra"
+  | "A_Star"
+  | "BFS"
+  | "DFS";
 
+export interface AlgorithmSlectType{
+    name:string;
+    value:AlgorithmType;
+}
 export type MazeType="None"|"Binary Tree"|"Recursive Division";
 export interface MazeSelectType{
     name:string;
