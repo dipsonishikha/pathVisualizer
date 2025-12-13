@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { PathfindingProvider } from './context/Pathfindingcontext'
-import './App.css'
 import './index.css'
 import { TileProvider } from './context/TileContext';
 import { SpeedProvider } from "./context/SpeedContext";
@@ -23,5 +22,8 @@ function App() {
     </PathfindingProvider>
   )
 }
+<div className="bg-red-500 text-white p-4 text-2xl m-4">
+     Tailwind Test - This should be RED!
+   </div>
 
 export default App
