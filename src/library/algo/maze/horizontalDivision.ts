@@ -24,27 +24,26 @@ export async function horizontalDivision({
   setIsDisabled: (disabled: boolean) => void;
   speed: SpeedType;
 }) {
-  const makeWallAt = row + getRandInt(0, height - 1) * 2 + 1; // Determine the row to place the wall
-  const makePassageAt = col + getRandInt(0, width) * 2; // Determine the column to leave a passage
+  const makeWallAt = row + getRandInt(0, height - 1) * 2 + 1;
+  const makePassageAt = col + getRandInt(0, width) * 2; 
 
   for (let i = 0; i < 2 * width - 1; i += 1) {
-    // Create the horizontal wall
     if (makePassageAt !== col + i) {
       if (
-        !isEqual(grid[makeWallAt][col + i], startTile) && // Check if the current tile is not the start tile
-        !isEqual(grid[makeWallAt][col + i], endTile) // Check if the current tile is not the end tile
+        !isEqual(grid[makeWallAt][col + i], startTile) && 
+        !isEqual(grid[makeWallAt][col + i], endTile) 
       ) {
-        grid[makeWallAt][col + i].isWall = true; // Set the current tile as a wall
+        grid[makeWallAt][col + i].isWall = true; 
 
         document.getElementById(
           `${makeWallAt}-${col + i}`
-        )!.className = `${WALL_TILE_STYLE} animate-wall`; // Add wall style and animation
-        await sleep(10 * SPEEDS.find((s) => s.value === speed)!.value - 5); // Wait for animation
+        )!.className = `${WALL_TILE_STYLE} animate-wall`; 
+        await sleep(10 * SPEEDS.find((s) => s.value === speed)!.value - 5);
       }
     }
   }
 
-  // Recursively divide the sections above and below the wall
+ 
   await recursiveDivision({
     grid,
     startTile,

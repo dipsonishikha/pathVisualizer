@@ -17,17 +17,16 @@ interface PathfindingContextInterface {
   setIsGraphVisualized: (isGraphVisualized: boolean) => void;
 }
 
-const PathfindingContext = createContext<PathfindingContextInterface | null>(null);
+export const PathfindingContext = createContext<
+  PathfindingContextInterface | undefined
+>(undefined);
 
-export const PathfindingContextProvider = ({ children }: { children: ReactNode }) => {
+export const PathfindingProvider = ({ children }: { children: ReactNode }) => {
   const [algorithm, setAlgorithm] = useState<AlgorithmType>("BFS");
   const [maze, setMaze] = useState<MazeType>("None");
-
-  // lazy initialiser so createGrid runs only once
-  const [grid, setGrid] = useState<GridType>(() =>
+  const [grid, setGrid] = useState<GridType>(
     createGrid(START_TILE_CONFIGURATION, END_TILE_CONFIGURATION)
   );
-
   const [isGraphVisualized, setIsGraphVisualized] = useState<boolean>(false);
 
   return (
@@ -47,18 +46,3 @@ export const PathfindingContextProvider = ({ children }: { children: ReactNode }
     </PathfindingContext.Provider>
   );
 };
-
-// custom hook to avoid repeating null checks in every consumer
-export const usePathfindingContext = () => {
-  const ctx = useContext(PathfindingContext);
-  if (!ctx) {
-    throw new Error("usePathfindingContext must be used within a PathfindingContextProvider");
-  }
-  return ctx;
-};
-
-// Backwards-compatible named aliases used elsewhere in the codebase
-export const Pathfindingcontext = PathfindingContext; // legacy name (was used in older files)
-export const PathfindingProvider = PathfindingContextProvider; // legacy provider name
-
-export default PathfindingContext;
